@@ -1,0 +1,42 @@
+# Project: Drop Calculator
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = Proje1_private.res
+OBJ      = file_loader.o group_text_parse_tree.o main.o text_file_loader.o $(RES)
+LINKOBJ  = file_loader.o group_text_parse_tree.o main.o text_file_loader.o $(RES)
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = Proje1.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+file_loader.o: file_loader.cpp
+	$(CPP) -c file_loader.cpp -o file_loader.o $(CXXFLAGS)
+
+group_text_parse_tree.o: group_text_parse_tree.cpp
+	$(CPP) -c group_text_parse_tree.cpp -o group_text_parse_tree.o $(CXXFLAGS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+text_file_loader.o: text_file_loader.cpp
+	$(CPP) -c text_file_loader.cpp -o text_file_loader.o $(CXXFLAGS)
+
+Proje1_private.res: Proje1_private.rc 
+	$(WINDRES) -i Proje1_private.rc --input-format=rc -o Proje1_private.res -O coff 
+
